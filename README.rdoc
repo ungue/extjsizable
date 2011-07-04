@@ -1,6 +1,7 @@
 = extjsizable
 
-Description goes here.
+This gem insert the method to_ext_json into ActiveRecord and Array.
+This method generates a Hash with the structure accepted by ExtJS.
 
 == Contributing to extjsizable
  

@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "extjsizable.gemspec",
     "lib/extjsizable.rb",
     "lib/extjsizable/active_record/extjs.rb",
     "lib/extjsizable/core_ext/array/extjs.rb",

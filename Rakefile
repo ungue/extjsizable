@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/ungue/extjsizable"
   gem.license = "MIT"
   gem.summary = %Q{Allow your models and collections to generate the JSON structure accepted by ExtJS}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{You can create REST services to be used for ExtJS in a easy manner by calling to_ext_json in your models or arrays.}
   gem.email = "ungue79@yahoo.es"
   gem.authors = ["Ungue"]
   # dependencies defined in Gemfile

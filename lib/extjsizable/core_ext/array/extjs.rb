@@ -8,15 +8,15 @@ module Extjsizable
 	end
 
 	module InstanceMethods
-	  # permite bloques con argumentos al estilo &[:metodo,argumentos]
+	  # Allow &[:method,arguments]
 	  def to_proc
 	    proc{|o| o.send *self}
 	  end
 
-	  # Crea un objeto JSON especificando los atributos que queremos que se muestren.
+	  # Creates a JSON object by specifying which attributes we want to be shown.
 	  # Ej:
 	  # { 'total' : 2,
-	  #   'datos' : [
+	  #   'data' : [
 	  #      { 'id' : 1, :nombre : 'Juan'  },
 	  #      { 'id' : 2, :nombre : 'Pedro' }
 	  #    ]
@@ -41,7 +41,7 @@ module Extjsizable
 		r 
 	      end
 	    end
-	    { :total => options[:total], :datos => result }
+	    { :total => options[:total], :data => result }
 	  end
 
 	  private

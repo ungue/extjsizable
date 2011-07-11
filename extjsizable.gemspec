@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ungue"]
-  s.date = %q{2011-07-05}
+  s.date = %q{2011-07-11}
   s.description = %q{You can create REST services to be used for ExtJS in a easy manner by calling to_ext_json in your models or arrays.}
   s.email = %q{ungue79@yahoo.es}
   s.extra_rdoc_files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
-    ".rspec",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",

@@ -30,12 +30,12 @@ module Extjsizable
 	      :except   => [],
 	      :include  => {}
 	    ) 
-	      
+
 	    result = self.map do |r|
 	      case r
 	      when Hash
 		record_from_hash(r, options)
-	      when ActiveRecord::Base
+	      when ::ActiveRecord::Base
 		record_from_model(r, options)
 	      else
 		r 

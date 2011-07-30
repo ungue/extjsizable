@@ -10,7 +10,7 @@ module Extjsizable
         def to_ext_json(options = {})
           success = options.delete(:success)
           methods = Array(options.delete(:methods))
-          underscored_class_name = self.class.to_s.demodulize.underscore
+	  include_model_name = options.has_key?(:wrap_attribute_model) ? options.delete(:wrap_attribute_model) : Extjsizable.config.wrap_attribute_model
 
           if success || (success.nil? && valid?)
             # devuelve success/data para cargar un formulario:
@@ -22,9 +22,9 @@ module Extjsizable
             #    }, 
             #    "success": true
             # }
-            data =  attributes.map{ |name, value| ["#{underscored_class_name}[#{name}]", value] }
+            data =  attributes.map{ |name, value| [extjs_attr_name(name, include_model_name), value] }
             methods.each do |method|
-              data << ["#{underscored_class_name}[#{method}]", self.send(method)] if self.respond_to? method
+              data << [extjs_attr_name(method, include_model_name), self.send(method)] if self.respond_to? method
             end
           
             { :success => true, :data => Hash[*data.flatten(1)] }.to_json(options)
@@ -34,13 +34,19 @@ module Extjsizable
             # {"errors": { "post[title]": "Title can't be blank", ... },
             # "success": false }
             error_hash = errors.inject({}) do |result, error| # error es [attribute, message]
-              field_key = "#{underscored_class_name}[#{error.first}]"
+              field_key = extjs_attr_name(error.first, include_model_name)
               result[field_key] ||= Array(errors[error.first]).to_sentence
               result
             end
             { :success => false, :errors => error_hash }.to_json(options)
           end
         end
+
+	private
+
+	def extjs_attr_name(name, include_model_name = false)
+	  include_model_name ? "#{self.class.to_s.demodulize.underscore}[#{name}]" : name.to_s
+	end
       end
 
     end

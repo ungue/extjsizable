@@ -26,6 +26,11 @@ describe "Extjsizable" do
         json_hash[:data].should have_key('category[name]')
       end  
       
+      it "should return all attributes with no model prefixes when called with :wrap_attribute_model => true" do
+        json_hash = parse_json( @category.to_ext_json(:wrap_attribute_model => false) ).with_indifferent_access
+        json_hash[:data].should have_key('name')
+      end  
+      
       it "should return all atributes and the result of the methods specified when called with :methods => [...]" do
         json_hash = parse_json(@category.to_ext_json(:methods => [:my_method])).with_indifferent_access
         json_hash[:data].should have_key('category[name]')

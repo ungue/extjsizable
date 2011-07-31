@@ -3,18 +3,12 @@
 This gem insert the method to_ext_json into ActiveRecord and Array.
 This method generates a Hash with the structure accepted by ExtJS.
 
-== Contributing to extjsizable
+{ total : N, data : [...] } in case of arrays.
+
+{ success : true,  :data {...} in case of activerecord created/updated/destroyed data succesfully.
+{ success : false, :errors {...} in case of activerecord created/updated/destroyed data failed.
+
+== TODO
  
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
-
-== Copyright
-
-Copyright (c) 2011 Ungue. See LICENSE.txt for
-further details.
-
+* Use as_json from activesupport version over 3.0.
+* Adapt to use ActiveSupport::Concern

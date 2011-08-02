@@ -10,5 +10,4 @@ This method generates a Hash with the structure accepted by ExtJS.
 
 == TODO
  
-* Use as_json from activesupport version over 3.0.
-* Adapt to use ActiveSupport::Concern
+* Use as_json from activesupport and activemodel version over 3.0.

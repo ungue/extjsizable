@@ -1,4 +1,5 @@
 require 'active_support/core_ext'
+require 'active_support/concern'
 require 'extjsizable/config'
 require 'extjsizable/active_record/extjs'
 require 'extjsizable/core_ext/array/extjs'

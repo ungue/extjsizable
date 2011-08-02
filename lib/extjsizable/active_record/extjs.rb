@@ -1,19 +1,17 @@
 module Extjsizable
   module ActiveRecord
     module ExtJs
-
-      def self.included(base)
-        base.send :include, InstanceMethods
-      end
+      extend ActiveSupport::Concern
 
       module InstanceMethods
+
         def to_ext_json(options = {})
           success = options.delete(:success)
           methods = Array(options.delete(:methods))
-	  include_model_name = options.has_key?(:wrap_attribute_model) ? options.delete(:wrap_attribute_model) : Extjsizable.config.wrap_attribute_model
+          include_model_name = options.has_key?(:wrap_attribute_model) ? options.delete(:wrap_attribute_model) : Extjsizable.config.wrap_attribute_model
 
           if success || (success.nil? && valid?)
-            # devuelve success/data para cargar un formulario:
+            # returns success/data to load a form:
             # {
             #   "data": { 
             #     "post[id]": 1, "post[title]": "First Post",
@@ -30,10 +28,10 @@ module Extjsizable
             { :success => true, :data => Hash[*data.flatten(1)] }.to_json(options)
 
           else
-            # devuelve no-success/errors al formulario:
+            # retrieves no-success/errors to the form:
             # {"errors": { "post[title]": "Title can't be blank", ... },
             # "success": false }
-            error_hash = errors.inject({}) do |result, error| # error es [attribute, message]
+            error_hash = errors.inject({}) do |result, error| # error is [attribute, message]
               field_key = extjs_attr_name(error.first, include_model_name)
               result[field_key] ||= Array(errors[error.first]).to_sentence
               result
@@ -41,14 +39,13 @@ module Extjsizable
             { :success => false, :errors => error_hash }.to_json(options)
           end
         end
-
-	private
-
-	def extjs_attr_name(name, include_model_name = false)
-	  include_model_name ? "#{self.class.to_s.demodulize.underscore}[#{name}]" : name.to_s
-	end
+        
+        private
+        
+        def extjs_attr_name(name, include_model_name = false)
+          include_model_name ? "#{self.class.to_s.demodulize.underscore}[#{name}]" : name.to_s
+        end
       end
-
     end
   end
 end

@@ -77,35 +77,34 @@ describe "Extjsizable" do
   describe Array do
     describe 'empty' do
       before do
-	@array = []
+        @array = []
       end
 
       it 'should return { total => 0, data => [] }' do
-	json_hash = @array.to_ext_json
-	json_hash.should have_key(:total)
-	json_hash[:total].should == 0
-
-	json_hash.should have_key(:data)
-	json_hash[:data].should be_empty
+        json_hash = @array.to_ext_json
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 0
+        json_hash.should have_key(:data)
+        json_hash[:data].should be_empty
       end
     end
     
     describe 'with 4 categories' do
       before do
-	@array = Array.new(4) { |i| Category.create :name => "Category #{i}" }
+        @array = Array.new(4) { |i| Category.create :name => "Category #{i}" }
       end
 
       it 'should return { :total => 4, :data => [{ "id" => ..., "name" => "Category ..."}, ...] }' do
-	json_hash = @array.to_ext_json
-	json_hash.should have_key(:total)
-	json_hash[:total].should == 4
+        json_hash = @array.to_ext_json
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 4
 
-	json_hash.should have_key(:data)
-	json_hash[:data].should have(4).categories
-	json_hash[:data].each do |h| 
-	  h.should have_key('id')
-	  h.should have_key('name')
-	end
+        json_hash.should have_key(:data)
+        json_hash[:data].should have(4).categories
+        json_hash[:data].each do |h| 
+          h.should have_key('id')
+          h.should have_key('name')
+        end
       end
     end
   end

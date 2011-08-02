@@ -43,11 +43,6 @@ class Product < ActiveRecord::Base
   validates_presence_of :name
 end
 
-# Helpers
-def parse_json(string)
-  ActiveSupport::JSON.decode(string)
-end
-
 RSpec.configure do |config|
   
 end

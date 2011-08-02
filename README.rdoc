@@ -1,13 +1,62 @@
 = extjsizable
 
-This gem insert the method to_ext_json into ActiveRecord and Array.
-This method generates a Hash with the structure accepted by ExtJS.
+This gem insert the method to_extjs into ActiveRecord and Array.
+Messages generated are valid to be used against <b>Ext JS 4</b> (http://www.sencha.com/products/extjs/).
+It requires Rails 3.0 or latter to work properly.
 
-{ total : N, data : [...] } in case of arrays.
+== ActiveRecord
 
-{ success : true,  :data {...} in case of activerecord created/updated/destroyed data succesfully.
-{ success : false, :errors {...} in case of activerecord created/updated/destroyed data failed.
+To load a form, the data extjs expect to meet is like so:
+ 
+ {
+   "data": { 
+     "id": 1, 
+     "title": "First Post",
+     "body": "This is my first post.",
+     "published": true, ...
+    }, 
+    "success": true
+ }
+ 
+<tt>* Previous versions of extjs needed attributes wrapped with the model name. Now this gem doesn't allow this.</tt>
+
+If <em>ActiveRecord::Base.include_root_in_json</em> is true then, the model name is used instead of data key:
+ {
+   "post": { 
+     "id": 1, 
+     "title": "First Post",
+     "body": "This is my first post.",
+     "published": true, ...
+    }, 
+    "success": true
+ }
+
+So that it is as easy as do:
+
+ @post.to_extjs
+
+In case the model has some failures, the sentence above will return:
+ {
+   "errors": { "title": ["Title can't be blank"] },
+   "success": false 
+ }
+
+Parameters accepted are the same as <b>as_json</b> from ActiveModel.
+
+== Array
+
+When to_extjs is called from ActiveRecord (or hashes) collections, Ext JS expect to receive a structure like that:
+
+ { 'total' : 2,
+   'data' : [
+      { 'id' : 1, :title : 'First Post'  },
+      { 'id' : 2, :title : 'Second Post' }
+    ]
+ }
+
+It is generated executing
+ Post.all.to_extjs
 
 == TODO
  
-* Use as_json from activesupport and activemodel version over 3.0.
+* Tests, tests, tests....

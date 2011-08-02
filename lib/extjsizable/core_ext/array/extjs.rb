@@ -15,7 +15,7 @@ module Extjsizable
           #    ]
           # }
           
-          def to_ext_json(options = {})
+          def to_extjs(options = {})
             options.reverse_merge!(
               :methods  => [],
               :total    => self.length,

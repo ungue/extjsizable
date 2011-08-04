@@ -57,6 +57,8 @@ When to_extjs is called from ActiveRecord (or hashes) collections, Ext JS expect
 It is generated executing
  Post.all.to_extjs
 
+Parameters accepted are the same as <b>as_json</b> from Array, nesting into each record.
+
 == TODO
  
 * Tests, tests, tests....

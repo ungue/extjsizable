@@ -61,6 +61,7 @@ describe "Extjsizable" do
 
     describe "not valid" do
       before do
+        Category.delete_all
         @category = Category.new
         @category.save
       end
@@ -85,6 +86,8 @@ describe "Extjsizable" do
   end
 
   describe Array do
+    before(:all) { ActiveRecord::Base.include_root_in_json = false }
+
     describe 'empty' do
       before do
         @array = []
@@ -99,9 +102,18 @@ describe "Extjsizable" do
       end
     end
     
-    describe 'with 4 categories' do
+    describe 'with 4 categories with some products each' do
       before do
-        @array = Array.new(4) { |i| Category.create :name => "Category #{i}" }
+        Product.delete_all
+        Category.delete_all
+
+        4.times do |i|
+          c = Category.new :name => "Category #{i}"
+          c.products = Array.new(2) { |j| Product.new :name => "Product #{j}" }
+          c.save
+        end
+
+        @array = Category.all
       end
 
       it 'should return { :total => 4, :data => [{ "id" => ..., "name" => "Category ..."}, ...] }' do
@@ -116,6 +128,48 @@ describe "Extjsizable" do
           h.should have_key('name')
         end
       end
+
+      it 'should return only id attributes when called with :only => :id ' do
+        json_hash = @array.to_extjs :only => :id
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 4
+
+        json_hash.should have_key(:data)
+        json_hash[:data].should have(4).categories
+        json_hash[:data].each do |h| 
+          h.should have_key('id')
+          h.should_not have_key('name')
+        end
+      end
+      
+      it 'should return only name attributes when called with :except => :id ' do
+        json_hash = @array.to_extjs :except => :id
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 4
+
+        json_hash.should have_key(:data)
+        json_hash[:data].should have(4).categories
+        json_hash[:data].each do |h| 
+          h.should have_key('name')
+          h.should_not have_key('id')
+        end
+      end
+      
+      it 'should return only related data attributes with :include => :products ' do
+        json_hash = @array.to_extjs :include => :products
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 4
+
+        json_hash.should have_key(:data)
+        json_hash[:data].should have(4).categories
+        json_hash[:data].each do |h| 
+          h.should have_key('name')
+          h.should have_key('id')
+          h.should have_key('products')
+          h[:products].should have(2).items
+        end
+      end
+
     end
   end
 

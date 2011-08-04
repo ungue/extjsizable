@@ -44,5 +44,4 @@ class Product < ActiveRecord::Base
 end
 
 RSpec.configure do |config|
-  
 end

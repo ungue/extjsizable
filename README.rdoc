@@ -19,7 +19,7 @@ To load a form, the data extjs expect to meet is like so:
     "success": true
  }
  
-If <em>ActiveRecord::Base.wrap_with_brackets/em> is true then, the model name wraps all attributes:
+If <em>ActiveRecord::Base.wrap_with_brackets</em> is true then, the model name wraps all attributes:
  {
    "data": { 
      "post[id]": 1, 

@@ -1,7 +1,8 @@
 = extjsizable
 
 This gem insert the method to_extjs into ActiveRecord and Array.
-Messages generated are valid to be used against <b>Ext JS 4</b> (http://www.sencha.com/products/extjs/).
+Messages generated are valid to be used against <b>Ext JS 4</b> (http://www.sencha.com/products/extjs/). 
+Now it's possible to generate <b>Ext JS 3</b> JSON data although it's in experimental state.
 It requires Rails 3.0 or latter to work properly.
 
 == ActiveRecord
@@ -18,7 +19,17 @@ To load a form, the data extjs expect to meet is like so:
     "success": true
  }
  
-<tt>* Previous versions of extjs needed attributes wrapped with the model name. Now this gem doesn't allow this.</tt>
+If <em>ActiveRecord::Base.wrap_with_brackets/em> is true then, the model name wraps all attributes:
+ {
+   "data": { 
+     "post[id]": 1, 
+     "post[title]": "First Post",
+     "post[body]": "This is my first post.",
+     "post[published]": true, ...
+    }, 
+    "success": true
+ }
+It allows to use this gem with Ext JS 3.
 
 If <em>ActiveRecord::Base.include_root_in_json</em> is true then, the model name is used instead of data key:
  {

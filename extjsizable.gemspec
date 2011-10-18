@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{extjsizable}
-  s.version = "1.0.0.alpha1"
+  s.name = "extjsizable"
+  s.version = "1.0.1.alpha1"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ungue"]
-  s.date = %q{2011-08-04}
-  s.description = %q{You can create REST services to be used for Ext JS 4 in an easy manner by calling to_extjs in your models or arrays.}
-  s.email = %q{ungue79@yahoo.es}
+  s.date = "2011-10-18"
+  s.description = "You can create REST services to be used for Ext JS 4 in an easy manner by calling to_extjs in your models or arrays."
+  s.email = "ungue79@yahoo.es"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -31,11 +31,11 @@ Gem::Specification.new do |s|
     "spec/extjsizable_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/ungue/extjsizable}
+  s.homepage = "http://github.com/ungue/extjsizable"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Allow your models and collections to generate the JSON structure accepted by Ext JS 4}
+  s.rubygems_version = "1.8.10"
+  s.summary = "Allow your models and collections to generate the JSON structure accepted by Ext JS 4"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

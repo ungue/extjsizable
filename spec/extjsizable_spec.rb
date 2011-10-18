@@ -33,8 +33,17 @@ describe "Extjsizable" do
         json_hash[:success].should be_true
         json_hash.should have_key(:category)
       end
+      
+      it "should return a category section with category[name] key when ActiveRecord::Base.wrap_with_brackets?" do 
+        ActiveRecord::Base.wrap_with_brackets = true
 
-      it "should return the attribute name of category" do
+        json_hash = @category.to_extjs
+        json_hash[:category].should have_key('category[name]')
+      end
+
+      it "should return the attribute name of category when not ActiveRecord::Base.wrap_with_brackets?" do
+        ActiveRecord::Base.wrap_with_brackets = false
+
         json_hash = @category.to_extjs
         json_hash[:category].should have_key(:name)
       end  

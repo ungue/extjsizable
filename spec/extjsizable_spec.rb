@@ -178,6 +178,21 @@ describe "Extjsizable" do
           h[:products].should have(2).items
         end
       end
+      
+      it 'should return only related data attributes with :include => :category and dasherize all keys' do
+        Array.dasherize_keys = true
+        json_hash = Product.all.to_extjs :include => :category
+        json_hash.should have_key(:total)
+        json_hash[:total].should == 8
+
+        json_hash.should have_key(:data)
+        json_hash[:data].should have(8).items
+        json_hash[:data].each do |h| 
+          h.should have_key('name')
+          h.should have_key('id')
+          h.should have_key('category_name')
+        end
+      end
 
     end
   end

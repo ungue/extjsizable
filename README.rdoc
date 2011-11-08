@@ -70,6 +70,26 @@ It is generated executing
 
 Parameters accepted are the same as <b>as_json</b> from Array, nesting into each record.
 
+if <em>Array.dasherize_keys</em> is true, then nested Hashes are plained:
+
+ { 'total' : 2,
+   'data' : [
+      { 'id' : 1, 'title' : 'First Post', 'owner' : { 'name' : 'John'}  },
+      { 'id' : 2, 'title' : 'Second Post', 'owner' : { 'name' : 'Frank'} }
+    ]
+ }
+ 
+ , becomes to
+ 
+ { 'total' : 2,
+   'data' : [
+      { 'id' : 1, 'title' : 'First Post', 'owner_name' : 'John' },
+      { 'id' : 2, 'title' : 'Second Post', 'owner_name' : 'Frank' }
+    ]
+ }
+
+For now, it works in belongs_to associations. has_many requires duplication of each line when a nested Array appears. I dont think you need that.
+
 == TODO
  
 * Tests, tests, tests....

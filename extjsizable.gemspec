@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "extjsizable"
-  s.version = "1.0.2"
+  s.version = "1.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ungue"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "extjsizable-1.0.2.gem",
     "extjsizable.gemspec",
     "lib/extjsizable.rb",
     "lib/extjsizable/active_record/extjs.rb",

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "extjsizable"
-  s.version = "1.0.1.alpha1"
+  s.version = "1.0.2"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ungue"]
-  s.date = "2011-10-18"
+  s.date = "2011-11-08"
   s.description = "You can create REST services to be used for Ext JS 4 in an easy manner by calling to_extjs in your models or arrays."
   s.email = "ungue79@yahoo.es"
   s.extra_rdoc_files = [

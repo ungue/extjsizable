@@ -70,12 +70,11 @@ module Extjsizable
 
       private
 
-      # Wrap with brackets so that {:a => {:b => :c} } becomes to { 'model[a][b]' => :c }
-      def wrap_hash_with_brackets(h, bracket_key = '')
-        return { bracket_key => h } unless h.is_a?(Hash)
-
+      # Wrap with brackets so that {:a => {:b => :c} } becomes to { 'model[a]' : {'b' : 'c'} }
+      def wrap_hash_with_brackets(h, model_name)
         h.reduce({}) do |nh, (k, v)|
-          nh.merge(wrap_hash_with_brackets(v, bracket_key + "[#{k.to_s}]"))
+          nh["#{model_name.to_s}[#{k.to_s}]"] = v
+          nh
         end
       end
     end

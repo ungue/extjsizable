@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 # Example:
+gem "rake", "~> 0.9.2"
 gem "activesupport", ">= 3.0"
 gem "activerecord", ">= 3.0"
 

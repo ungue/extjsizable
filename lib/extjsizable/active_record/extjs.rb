@@ -15,7 +15,7 @@ module Extjsizable
           success = options.delete(:success)
           underscored_class_name = self.class.to_s.demodulize.underscore
 
-          if success || (success.nil? && valid?)
+          if success || (success.nil? && errors.empty?)
             # returns success/data to load a form:
             # {
             #   "data": { 
